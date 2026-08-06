@@ -4,6 +4,9 @@ from Modules.GenWidgets.Icon import *
 if IS_LINUX:
     import dbus
 
+def logout(self):
+    pygame.event.post(pygame.event.Event(pygame.QUIT))
+
 def reboot(self):
     if IS_LINUX:
         bus = dbus.SystemBus()
@@ -52,7 +55,8 @@ class Power():
         self.image = assetpath('powerMenuBackground.png')
         self.icon_data = [
             ('shutdown.png', 'Shutdown', (64,64), lambda:yesno(self, poweroff)),
-            ('restart.png', 'Restart', (64,64), lambda:yesno(self, reboot))
+            ('restart.png', 'Restart', (64,64), lambda:yesno(self, reboot)),
+            ('exit.png', 'Logout', (64,64), lambda:yesno(self, logout))
         ]
         self.num_icons = len(self.icon_data)
         self.icons = []
